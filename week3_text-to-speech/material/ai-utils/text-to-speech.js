@@ -29,7 +29,6 @@ waitForVoicesLoaded().then(
 function speak(botName, sentence) {
     let utterance = new SpeechSynthesisUtterance(sentence);
     let voice = __botVoices.find((item) => {return item[0] == botName});
-    console.log(voice);
     if (voice !== undefined){
         utterance.voice = voice[1];
     } else {
