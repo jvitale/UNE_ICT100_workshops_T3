@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #main-canvas {
+            width: 640px;
+            height: 480px;
+            background-color: white;
+            position: relative;
+            float: left;
+            margin-left: 10px;
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+        }
+        #commands {
+            width: 400px;
+            height: 480px;
+            position: relative;
+            float: left;
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+        }
+
+        #feed-panel {
+            width: 360px;
+            height: 480px;
+            background-color: white;
+            position: relative;
+            float: left;
+            margin-left: 10px;
+            border-style: solid;
+            border-color: black;
+            border-width: 1px;
+        }
+
+        #video-frame {
+            margin-left: 20px;
+            position: relative;
+            background-color: brown;
+        }
+
+        #webcam-feed {
+            position:absolute;
+            top:0px;
+            left:0px;
+        }
+
+        #pico {
+            background-image: url("assets/pico.png");
+            left: 100px;
+            top: 260px;
+        }
+        #bit {
+            background-image: url("assets/bit.png");
+            left: 360px;
+            top: 260px;
+        }
+        .title {
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+            position: relative;
+            top:-15px;
+            left: 10px;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        .bot {
+            width: 150px;
+            height: 190px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            position: absolute;
+        }
+
+        .text-balloon {
+            width: 170px;
+            height: 145px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image: url("assets/text-balloon.png");
+            position: absolute;
+            
+            
+            
+        }
+
+        .text-balloon div.bot-message {
+            position: relative;
+            top:10px;
+            left:15px;
+            width: 130px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+        }
+
+        #text-balloon-pico{
+            top: 170px;
+            left: 190px;
+            display: none;
+        }
+
+        #text-balloon-bit{
+            top: 170px;
+            left: 450px;
+            display: none;
+        }
+
+        .button-command {
+            margin-left: 10px;
+            margin-top:10px;
+        }
+
+        .input-text {
+            width: 250px;
+            margin-top:10px;
+            margin-left: 10px;
+        }
+    </style>
+    <script src="events-manager/pubsub-manager.js" defer></script>
+    <script src="ai-utils/text-to-speech.js" defer></script>
+    <script src="ai-utils/speech-recognition.js" defer></script>
+    <script src="ai-utils/webcam-utils.js" defer></script>
+    <script src="ai-utils/face-api.min.js" defer></script>
+    <script src="ai-utils/face-detection.js" defer></script>
+    <script src="ai-utils/face-recognition.js" defer></script>
+    <script src="https://unpkg.com/compromise" defer></script>
+    <script src="https://unpkg.com/compromise-numbers"></script>
+    <script src="gui-utils/text-balloon.js" defer></script>
+    <script src="index.js" defer></script>
+    <title>My Chatbots</title>
+</head>
+<body>
+    <div id="commands">
+        <span class="title">Commands</span><br />
+        <input id="input-text-pico" type="text" value="" class="input-text" /> <button id="text-pico" class="button-command">Text Pico</button>  <br/>
+        <input id="input-text-bit" type="text" value="" class="input-text" /> <button id="text-bit" class="button-command">Text Bit</button>
+        <br /><br />
+        <button id="talk-to-pico" class="button-command">Talk to Pico</button>
+        <button id="talk-to-bit" class="button-command">Talk to Bit</button>
+        
+        
+    </div>
+    <div id="main-canvas">
+        <span class="title">Chatbots</span><br />
+        <div id="text-balloon-pico" class="text-balloon">
+            <div class="bot-message"></div>
+        </div>
+        <div id="text-balloon-bit" class="text-balloon">
+            <div class="bot-message"></div>
+        </div>
+        <div id="pico" class="bot"></div>
+        <div id="bit" class="bot"></div>
+    </div>
+    <div id="feed-panel">
+        <span class="title">Feeds</span><br />
+        <div id="video-frame">
+            <video id="webcam-feed" width="320" height="240" autoplay muted></video>
+        </div>
+    </div>
+</body>
+</html>
